@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Net.png" type="image/x-icon">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+    <title>Home - Netflix</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <style>
+        * {
+            font-family: cursive;
+        }
+
+        body {
+            /* background-image: url("Net7.jpg"); */
+            margin: 0px;
+            padding: 0px;
+            background-color: rgb(21, 21, 21);
+        }
+
+        /* body:hover{
+            background: url("Net9.mp4");
+        } */
+
+        .first {
+            /* background-color: black;
+            background-image: url("Net5.jpg"); */
+            /* background-image: url("Net7.jpg"); */
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 7fr 3fr;
+            grid-gap: 1rem;
+        }
+
+        .left img {
+            height: 80px;
+            width: 130px;
+            margin-left: 30px;
+            margin-top: 0px;
+            /* padding: 5px; */
+        }
+
+        .mid ul {
+            align-items: center;
+        }
+
+        .mid ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 9px;
+            /* border: 2px solid black; */
+        }
+
+        .mid ul li :hover {
+            color: rgb(188, 185, 185);
+        }
+
+        .mid ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* .mid ul li a :hover, .mid ul li a.active{
+            color: black;
+        } */
+        a :hover {
+            color: grey;
+        }
+
+        .right {
+            margin-top: 0px 0px;
+            align-items: center;
+            display: grid;
+            grid-template-columns: 6fr 1fr 1fr;
+            grid-gap: 0rem;
+            float: left;
+        }
+
+        .right input[type=search] {
+            width: 160px;
+            color: black;
+            opacity: 0.33;
+            border: 1px solid black;
+            padding: 4px;
+            border-radius: 5px;
+            float: right;
+            margin-right: 10px;
+        }
+
+        .right img {
+            width: 30px;
+            height: 30px;
+            padding: 0px;
+            margin: 0px 0px;
+            border-style: none;
+        }
+
+        .img {
+            margin-left: px;
+        }
+
+        #ragnar {
+            padding-left: 2px;
+            margin-left: 2px;
+            margin-right: 15px;
+            display: grid;
+            grid-template-columns: 5fr 5fr;
+            grid-gap: 0rem;
+        }
+
+        #ragnar select {
+            width: 15px;
+        }
+
+        .Name {
+            /* border: 2px solid black; */
+            margin-top: 100px;
+            margin-bottom: 20px;
+            width: 40%;
+            margin-left: 3%;
+            color: white;
+            /* display: flex */
+            /* padding-left: 400px; */
+
+        }
+
+        .Name img {
+            width: 35px;
+            height: 45px;
+        }
+
+        .Name1 {
+            display: flex;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+
+        .Name h1 {
+            color: red;
+            font-size: 3.4em;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        .Name h4 {
+            margin-top: 1px;
+        }
+
+        .btn1 {
+            background-color: white;
+            color: black;
+            font-size: 1.2em;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            border-style: none;
+            padding: 8px 25px;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+        .btn2 {
+            opacity: 0.7;
+            border-style: none;
+            color: black;
+            font-size: 1.2em;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 8px 30px;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+        .btn1:hover {
+            background-color: grey;
+        }
+
+        .btn2:hover {
+            background-color: grey;
+        }
+
+        #h3 {
+            margin-top: 23px;
+        }
+
+        #myVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        #myImg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+            z-index: -1;
+        }
+
+        #myImg:hover {
+            opacity: 0;
+        }
+
+        .first:hover #myVideo {
+            opacity: 1;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 100%);
+            overflow: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .wrapper section {
+            width: 100%;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(5, auto);
+            margin: 0px 0;
+        }
+
+        .wrapper section .item {
+            padding: 20px 2px;
+            transition: 250ms all;
+        }
+
+        .wrapper section .item:hover {
+            margin: 0 40px;
+            transform: scale(1.2);
+        }
+
+        .wrapper section a {
+            position: absolute;
+            color: #fff;
+            text-decoration: none;
+            font-size: 6em;
+            background: black;
+            width: 80px;
+            padding: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .wrapper section a:nth-of-type(1) {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, black 100%);
+        }
+
+        .wrapper section a:nth-of-type(2) {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, black 100%);
+        }
+
+        @media only screen and (max-width: 600px) {
+            a.arrow__btn {
+                display: none;
+            }
+        }
+        .text h3{
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            margin-left: 3%;
+            margin-top: 30px;
+            margin-bottom: 5px;
+        }
+        #second{
+            background-color: rgb(21, 21, 21);
+        }
+        #third{
+            background-color: rgb(21, 21, 21);
+            margin: 70px;
+            margin-bottom: 20px;
+        }
+        .end{
+            display: grid;
+            grid-template-columns: 2fr 2fr 2fr 2fr;
+        }
+        .end ul li{
+            list-style: none;
+            padding: 8px 0px;
+        }
+        .end ul li a{
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            color: grey;
+            font-size: 0.9rem;
+        }
+        .end ul li a:hover{
+            text-decoration: underline;
+        }
+        #btn3{
+            background-color: rgb(21, 21, 21);
+            border: 1px solid grey;
+            font-family: Arial, Helvetica, sans-serif;
+            color: grey;
+            padding: 5px 10px;
+            margin-left: 4%;
+        }
+        #btn3:hover{
+            color: white;
+            cursor: pointer;
+        }
+        footer{
+            margin-left: 9.5%;
+            color: grey;
+            margin-bottom: 20px;
+        }
+        footer div{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="first">
+        <div class="container">
+            <div class="left">
+                <img src="Net2.png" alt="">
+            </div>
+            <div class="mid">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">New & Popular</a></li>
+                    <li><a href="#">My List</a></li>
+                    <li><a href="#">Browse by languages</a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <div><input type="search" placeholder="Titles, people, genres"></div>
+                <div><img class="img" src="Net4.png" alt=""></div>
+                <div id="ragnar">
+                    <div><img class="img" src="Net3 (2).png" alt=""></div>
+                    <div>
+                        <select name="dog-names" id="dog-names">
+                            <option value="">Manage Profile</option>
+                            <option value="">Transfer Profile</option>
+                            <option value="">Account</option>
+                            <option value="">Sign out</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Name">
+            <div class="Name1">
+                <img src="Net.png" alt="">
+                <h3> SERIES</h3>
+            </div>
+            <div>
+                <h1>VIKINGS</h1>
+            </div>
+            <div class="Name1">
+                <h2>TOP🔟 </h2>
+                <h3 id="h3"> #3 in Series Today</h3>
+            </div>
+            <div>
+                <h4>
+                    The HISTORY original series Vikings transports us to the brutal and mysterious world of Ragnar
+                    Lothbrok, a Viking warrior and farmer who yearns to explore--and raid--the distant shores across
+                    the ocean.</h4>
+            </div>
+            <button class="btn1">▶ Play</button>
+            <button class="btn2">More Info</button>
+        </div>
+        <div><img id="myImg" src="Net7.jpg" alt=""></div>
+        <div>
+            <video autoplay muted loop id="myVideo">
+                <source src="Net9.mp4" type="video/mp4">
+            </video>
+
+        </div>
+    </section>
+    <section id="second">
+        <div class="wrapper">
+            <section id="section1">
+                <a href="#section3" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABZEK-7pZ1H5FD4cTyUb9qB_KeyJGz5p-kfPhCFv4GU_3mbdm8Xfsy4IBchlG9PFNdGff8cBNPaeMra72VFnot41nt0y3e8RLgaVwwh3UvyM2H2_MkmadWbQUeGuf811K7-cxJJh7gA.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABQCoK53qihwVPLRxPEDX98nyYpGbxgi5cc0ZOM4iHQu7KQvtgNyaNM5PsgI0vy5g3rLPZdjGCFr1EggrCPXpL77p2H08jV0tNEmIfs_e8KUfvBJ6Ay5nM4UM1dl-58xA6t1swmautOM.webp">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABdYtAqj8CyaJTWq5taD8Ro_UgwH3nne9QpFGVps-2J3IG-leqrfqXFii4jzZn48nPYTkrlwKQEV0R7_cEKlYBPRzdKqNODc-Oz26IL3LlLgFboXibIWXwxzeYxzuqn0I9TpARjeByw.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABbcCX42tsqGbBvO2y9CQv5-7QvYbCfoHtXsuc6NPCtZaKa4l4fBX3XWvUwG9F2A3CTsNpHVmulxBbdXKwK8Q6xGjejd9FoadGkZ7CnGrSl601TOQjzSHJ23NuIPC8j0QMGORL4uRIA.jpg">
+                </div>
+                <a href="#section2" class="arrow__btn">›</a>
+            </section>
+            <section id="section2">
+                <a href="#section1" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABVopDZ5Fy9_fk_HO5WxHTXKKjKhtWFupbSjuvPwfLK_vytzon4EwRUdGgYJ34JwPxOTK_NkV3aXfkULMB0Dcct-FyfqzH-X44VXuRMp4QeBHlvKwWeZFpZlGdItPzmmg4scmwhG7SQ.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABTOj1-116yVcgKWMU2dI3GFR4x0fSkiGsqtLLeLUxRR7STaksjAqBTrYlTfrB8nIGnGvXksi0ewXAhVGg6-pLxpFOIfcpjK-pf8D5xehFZo5a6vJbo4L0AGbrzglbyUoq255QBJgRQ.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABd3IBDpxbRcHXvRMFCZeKa2aHLU1P4SJtrACMS9om3yhLjqPlvNlmR_fypPxjtbsbnKaC4JZhPSpDG4r_kdxSHHAltWguMcCB-1Y1OShr2zWfUv7Whf_39fNH5ZJ3_0gxQrs0akmQjQz44_LT7jXH5LMZ7iMBAzac5IEj4m7Fn_5OWEGYnVsDsKG-QTommDooULMDF9bEw.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABXSd7bhDddcwkq9XpksoQFCHVx29Sxl_h4hb2n3F2GIt32a4XWcOnctQfgnT5qdolv8UML6_xNB5CJ89h56wueb13mYmEBr0sx5e9iLPdtVcOQAOmKXKWHHXwFvJuCUwuNnL3s8eAQwqLXPVMHMEsujM684rUGrZNF2btN2GRy5-RyEslsxZO93V2Q_H2bWs8A8oayt1h5M.webp">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABbXWODpAWqVXcmmjMA7K-2mPkQpvwCLfSdeyhVXzR8A3MSpdSEnnjf4HEJJTYC-TnktU6njTUGAxmzWEYCaJbk4v_ZeL-7QGzmkvYBjg_N-evr2XmcX-Fanoyvu_nimFP4iigPe4O3Vr_WcgplhwkDrJwPUJa84wRLrNAx3TufN5V7cWRP4indqu5HQahvgFEqfL9zjp4g.jpg">
+                </div>
+                <a href="#section3" class="arrow__btn">›</a>
+            </section>
+            <section id="section3">
+                <a href="#section2" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRr4YxdaABuAuH_3FmSQZn7BCvLp-UUPsXE9MiYpvFP3CSUHV2zOew5oVqKqqdaOd3tbFVS0Uf67uIs7_eZydlCghg4nK0nMatRpPImABwTOhnNzCLCxdKrua7pPIcPCZqBYTeAO5g.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABTyWK1MKaw8GcObtz47R2Tj7wkLJ7qQu9tk6TVpcoyxpzD4B-zZ569bQ5vGrREBL-MWFkGilXUwy7tCDaj2XOGkUB4RsbbFAmp9NgSr6lygMpUGNHSlyfrFbUORsRkrxSIoh_ggOvg.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABY7NwkWEJIfXsn6t3Li4bGSCQ1nEErPisI5ZZtXlC-_VRBZOUrhWK5X3vt3t6SR_cpgVhCwxgQqFFDJhk62Kk8hawOnYGZMr0LKeLczMFV2zalCFjkcdLksvT4HB2LEi6LFyruyk3Uu0LmNGsHfC2A8Bly60smr_3sDbz4RruXcklPOG1qYq9wUVu3zfaiwNvqmG4b8aFA.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABemXHOga9feFnOux6I2YyACBD94wvM7N3vcTGIfMpQ_BcaXeoeM9XyzdVdamKtxt0SHXZfvsl6czcp3E48tXMLtHBxuQsh1BjHtPGgJDZ81je_FjItINiqzLtir0A30s_e4KR8G3d7AYAPDjZVOY97bNpzNqtkcHcGp7fGnJByVCps1uLfG9U9tK3Ma1A_3JbRt0NiT2_Q.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABVxuRB932hvre-XP0gh6ar5ztoR3Oe3QjKHkyvcDnRak2MKXOrx5H7mFQSvggefMFOppwEs7ZCCpiqrJ_CYGvtvYB9NpU4SWUtNO6uV2u-DTID267AcHjHcGvGBQJ1ufddDkxcGOZyi5MlOQ5QUmBun4652FbYUnib3zMYQDgcna_Pvz8y_HO5fbokxezrRR1JZAAiqFSQ.jpg">
+                </div>
+                <a href="#section1" class="arrow__btn">›</a>
+            </section>
+        </div>
+        <div class="text"><h3>Trending Now</h3></div>
+        <div class="wrapper">
+            <section id="section4">
+                <a href="#section6" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net10.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net11.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net12.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net13.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net14.png">
+                </div>
+                <a href="#section5" class="arrow__btn">›</a>
+            </section>
+            <section id="section5">
+                <a href="#section4" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABVopDZ5Fy9_fk_HO5WxHTXKKjKhtWFupbSjuvPwfLK_vytzon4EwRUdGgYJ34JwPxOTK_NkV3aXfkULMB0Dcct-FyfqzH-X44VXuRMp4QeBHlvKwWeZFpZlGdItPzmmg4scmwhG7SQ.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net15.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABd3IBDpxbRcHXvRMFCZeKa2aHLU1P4SJtrACMS9om3yhLjqPlvNlmR_fypPxjtbsbnKaC4JZhPSpDG4r_kdxSHHAltWguMcCB-1Y1OShr2zWfUv7Whf_39fNH5ZJ3_0gxQrs0akmQjQz44_LT7jXH5LMZ7iMBAzac5IEj4m7Fn_5OWEGYnVsDsKG-QTommDooULMDF9bEw.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABXSd7bhDddcwkq9XpksoQFCHVx29Sxl_h4hb2n3F2GIt32a4XWcOnctQfgnT5qdolv8UML6_xNB5CJ89h56wueb13mYmEBr0sx5e9iLPdtVcOQAOmKXKWHHXwFvJuCUwuNnL3s8eAQwqLXPVMHMEsujM684rUGrZNF2btN2GRy5-RyEslsxZO93V2Q_H2bWs8A8oayt1h5M.webp">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABbXWODpAWqVXcmmjMA7K-2mPkQpvwCLfSdeyhVXzR8A3MSpdSEnnjf4HEJJTYC-TnktU6njTUGAxmzWEYCaJbk4v_ZeL-7QGzmkvYBjg_N-evr2XmcX-Fanoyvu_nimFP4iigPe4O3Vr_WcgplhwkDrJwPUJa84wRLrNAx3TufN5V7cWRP4indqu5HQahvgFEqfL9zjp4g.jpg">
+                </div>
+                <a href="#section6" class="arrow__btn">›</a>
+            </section>
+            <section id="section6">
+                <a href="#section5" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRr4YxdaABuAuH_3FmSQZn7BCvLp-UUPsXE9MiYpvFP3CSUHV2zOew5oVqKqqdaOd3tbFVS0Uf67uIs7_eZydlCghg4nK0nMatRpPImABwTOhnNzCLCxdKrua7pPIcPCZqBYTeAO5g.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABTyWK1MKaw8GcObtz47R2Tj7wkLJ7qQu9tk6TVpcoyxpzD4B-zZ569bQ5vGrREBL-MWFkGilXUwy7tCDaj2XOGkUB4RsbbFAmp9NgSr6lygMpUGNHSlyfrFbUORsRkrxSIoh_ggOvg.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABY7NwkWEJIfXsn6t3Li4bGSCQ1nEErPisI5ZZtXlC-_VRBZOUrhWK5X3vt3t6SR_cpgVhCwxgQqFFDJhk62Kk8hawOnYGZMr0LKeLczMFV2zalCFjkcdLksvT4HB2LEi6LFyruyk3Uu0LmNGsHfC2A8Bly60smr_3sDbz4RruXcklPOG1qYq9wUVu3zfaiwNvqmG4b8aFA.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABemXHOga9feFnOux6I2YyACBD94wvM7N3vcTGIfMpQ_BcaXeoeM9XyzdVdamKtxt0SHXZfvsl6czcp3E48tXMLtHBxuQsh1BjHtPGgJDZ81je_FjItINiqzLtir0A30s_e4KR8G3d7AYAPDjZVOY97bNpzNqtkcHcGp7fGnJByVCps1uLfG9U9tK3Ma1A_3JbRt0NiT2_Q.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABVxuRB932hvre-XP0gh6ar5ztoR3Oe3QjKHkyvcDnRak2MKXOrx5H7mFQSvggefMFOppwEs7ZCCpiqrJ_CYGvtvYB9NpU4SWUtNO6uV2u-DTID267AcHjHcGvGBQJ1ufddDkxcGOZyi5MlOQ5QUmBun4652FbYUnib3zMYQDgcna_Pvz8y_HO5fbokxezrRR1JZAAiqFSQ.jpg">
+                </div>
+                <a href="#section4" class="arrow__btn">›</a>
+            </section>
+        </div>
+
+
+     <!-- next -->
+
+
+        <div class="text"><h3>Watch It Again</h3></div>
+        <div class="wrapper">
+            <section id="section7">
+                <a href="#section9" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net16.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net17.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net18.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net19.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net20.png">
+                </div>
+                <a href="#section8" class="arrow__btn">›</a>
+            </section>
+            <section id="section8">
+                <a href="#section7" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net21.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net15.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net11.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net10.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net13">
+                </div>
+                <a href="#section9" class="arrow__btn">›</a>
+            </section>
+            <section id="section9">
+                <a href="#section8" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net10.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABTyWK1MKaw8GcObtz47R2Tj7wkLJ7qQu9tk6TVpcoyxpzD4B-zZ569bQ5vGrREBL-MWFkGilXUwy7tCDaj2XOGkUB4RsbbFAmp9NgSr6lygMpUGNHSlyfrFbUORsRkrxSIoh_ggOvg.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABY7NwkWEJIfXsn6t3Li4bGSCQ1nEErPisI5ZZtXlC-_VRBZOUrhWK5X3vt3t6SR_cpgVhCwxgQqFFDJhk62Kk8hawOnYGZMr0LKeLczMFV2zalCFjkcdLksvT4HB2LEi6LFyruyk3Uu0LmNGsHfC2A8Bly60smr_3sDbz4RruXcklPOG1qYq9wUVu3zfaiwNvqmG4b8aFA.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABemXHOga9feFnOux6I2YyACBD94wvM7N3vcTGIfMpQ_BcaXeoeM9XyzdVdamKtxt0SHXZfvsl6czcp3E48tXMLtHBxuQsh1BjHtPGgJDZ81je_FjItINiqzLtir0A30s_e4KR8G3d7AYAPDjZVOY97bNpzNqtkcHcGp7fGnJByVCps1uLfG9U9tK3Ma1A_3JbRt0NiT2_Q.jpg">
+                </div>
+                <div class="item">
+                    <img
+                        src="https://occ-0-243-299.1.nflxso.net/dnm/api/v5/rendition/a76057bcfd003711a76fb3985b1f2cf74beee3b8/AAAABVxuRB932hvre-XP0gh6ar5ztoR3Oe3QjKHkyvcDnRak2MKXOrx5H7mFQSvggefMFOppwEs7ZCCpiqrJ_CYGvtvYB9NpU4SWUtNO6uV2u-DTID267AcHjHcGvGBQJ1ufddDkxcGOZyi5MlOQ5QUmBun4652FbYUnib3zMYQDgcna_Pvz8y_HO5fbokxezrRR1JZAAiqFSQ.jpg">
+                </div>
+                <a href="#section7" class="arrow__btn">›</a>
+            </section>
+        </div>
+
+
+<!-- hello  -->
+
+
+        <div class="text"><h3>Top 10 Movies in India Today</h3></div>
+        <div class="wrapper">
+            <section id="section10">
+                <a href="#section12" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net24.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net25.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net26.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net27.png">
+                </div>
+                <a href="#section11" class="arrow__btn">›</a>
+            </section>
+            <section id="section11">
+                <a href="#section10" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net28.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net29.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net30.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net31.png">
+                </div>
+                <a href="#section12" class="arrow__btn">›</a>
+            </section>
+            <section id="section12">
+                <a href="#section11" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net32.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net33.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net24.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net25.png">
+                </div>
+                <a href="#section10" class="arrow__btn">›</a>
+            </section>
+        </div>
+
+<!-- next  -->
+
+        <div class="text"><h3>High School TV Teen Dramas</h3></div>
+        <div class="wrapper">
+            <section id="section13">
+                <a href="#section15" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net34.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net35.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net36.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net37.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net38.png">
+                </div>
+                <a href="#section14" class="arrow__btn">›</a>
+            </section>
+            <section id="section14">
+                <a href="#section13" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net39.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net21.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net22.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net23.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net40.png">
+                </div>
+                <a href="#section15" class="arrow__btn">›</a>
+            </section>
+            <section id="section15">
+                <a href="#section14" class="arrow__btn">‹</a>
+                <div class="item">
+                    <img
+                        src="Net11.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net12.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net13.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net14.png">
+                </div>
+                <div class="item">
+                    <img
+                        src="Net15.png">
+                </div>
+                <a href="#section13" class="arrow__btn">›</a>
+            </section>
+        </div>
+    </section>
+
+    <section id="third">
+        <div class="end">
+            <div>
+                <ul>
+                    <li><a href="">Audio Description</a></li>
+                    <li><a href="">Gift Cards</a></li>
+                    <li><a href="">Investor Relations</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><a href="">Legal Notices</a></li>
+                    <li><a href="">Terms of Use</a></li>
+                    <li><a href="">Corporate Information</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><a href="">Jobs</a></li>
+                    <li><a href="">Media Centre</a></li>
+                    <li><a href="">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><a href="">Cookie Preferences</a></li>
+                    <li><a href="">Privacy</a></li>
+                    <li><a href="">Help Centre</a></li>
+                </ul>
+            </div>
+        </div>
+        <button id="btn3">Service Code</button>
+    </section>
+    <footer>
+        <div class="center">
+            &copy; 1997-2023 Netflix Inc.
+        </div>
+    </footer>
+</body>
+
+</html>

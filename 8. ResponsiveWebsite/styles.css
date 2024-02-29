@@ -1,0 +1,102 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url(./bg-img.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  height: 100vh;
+  width: 100%;
+}
+
+body::before {
+  content: '';
+  position:absolute;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+}
+
+header {
+  position: fixed;
+  color: white;
+  background-color: #1c1a1c;
+  padding: 10px 0;
+  width: 100%;
+  z-index:70;
+}
+
+header .menu h1 {
+  font-size: 35px;
+  font-weight: 600;
+}
+
+header .menu {
+  max-width: 1250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+header .menu ul {
+  display: flex;
+}
+
+header .menu ul li {
+  list-style-type: none;
+  margin-left: 7px;
+}
+
+header .menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition: 0.4s ease-in all;
+}
+
+header .menu ul li a:hover {
+  background: #fff;
+  color: #000;
+}
+
+.content h1 {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  font-size: 60px;
+  transform: translate(-50%,-50%);
+  color: white;
+}
+
+.button {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.button .btn {
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 8px;
+  background: transparent;
+  padding: 15px 50px;
+  margin: 0 20px;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  transition: 0.3s ease-in-out all;
+}
+
+.button .btn:hover {
+  background: white;
+  color: #000;
+}
